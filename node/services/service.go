@@ -16,7 +16,6 @@ import (
 	"github.com/celestiaorg/celestia-node/header/p2p"
 	"github.com/celestiaorg/celestia-node/header/store"
 	"github.com/celestiaorg/celestia-node/header/sync"
-	"github.com/celestiaorg/celestia-node/libs/fxutil"
 	"github.com/celestiaorg/celestia-node/params"
 	headerservice "github.com/celestiaorg/celestia-node/service/header"
 	"github.com/celestiaorg/celestia-node/service/share"
@@ -147,8 +146,8 @@ func DASer(
 }
 
 // LightAvailability constructs light share availability.
-func LightAvailability(ctx context.Context, lc fx.Lifecycle, bServ blockservice.BlockService) share.Availability {
-	return share.NewLightAvailability(blockservice.NewSession(fxutil.WithLifecycle(ctx, lc), bServ))
+func LightAvailability(bServ blockservice.BlockService) share.Availability {
+	return share.NewLightAvailability(bServ)
 }
 
 func FullAvailability(bServ blockservice.BlockService) share.Availability {
